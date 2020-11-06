@@ -21,7 +21,7 @@ dotnet restore
     * DotNet (3.1.402)
     * Entity Framework (3.1.9)
 
-*Front End
+* Front End
     * Angular 10
     * Highcharts
     * Rxjs
