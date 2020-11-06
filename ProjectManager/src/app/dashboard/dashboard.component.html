@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <div class="card card-1 p-4">
+                <span class="display-3 text-success text-center">
+                    {{quantidadeProgramadores}}
+                </span>
+                <hr>
+                <p class="card-text text-center font-m">
+                    Total de Programadores
+                </p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-1 p-4">
+                <span class="display-3 text-center text-primary">
+                    {{quantidadeProjetos}}
+                </span>
+                <hr>
+                <p class="card-text text-center font-m">
+                    Total de Projetos
+                </p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-1  p-4">
+                <span class="display-3 text-center text-danger">
+                    {{menorProjeto}}
+                </span>
+                <hr>
+                <p class="card-text   text-center font-m">
+                    Projeto Com Menos Programadores
+                </p>
+            </div>
+        </div>     
+    </div>
+    <div class="row mb-5 mt-2">
+        <div class="col-6">
+            <div class="card card-1  p-4">
+                <span *ngFor="let vencido of projetosVencidos" class="display-3 text-center text-danger">
+                    {{vencido.nome}}
+                </span>
+                <p class="card-text   text-center font-m">
+                    Projetos Atrasados
+                </p>
+                <hr>
+                <p class="card-text   text-center font-m">
+                  
+                </p>
+               
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card-1  p-4">
+                <span class="display-3 text-center text-danger">
+                    {{proximoProjeto.nome}}
+                </span>
+                <hr>
+                <p class="card-text   text-center font-m">
+                    Próximo Projeto a Atrasar
+                </p>
+                <hr>
+                <p class="card-text   text-center font-p">
+                   Programadores
+                </p>
+                <strong class="text-center" *ngFor="let programador of proximoProjeto.programadores ">{{programador.nome}}</strong>
+            </div>    
+        </div>     
+    </div>
+    <highcharts-chart 
+    [Highcharts]="Highcharts"
+    [options]="chartOptions"
+    
+    style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
+
+
+    <highcharts-chart 
+    [Highcharts]="Highcharts"
+    [options]="chartOptionsTime"
+    
+    style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
+</div>

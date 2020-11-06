@@ -1,0 +1,79 @@
+<div class="row">
+  
+  <div class="col-sm-6" *ngIf="programadorSelecionado">
+    
+    <div class="row">
+      <div class="mr-auto">
+        <h2>
+          {{(programadorSelecionado.id === 0 ? 'Novo Programador' : 'Código: #'+ programadorSelecionado.id)}}
+        </h2>
+      </div>
+      <div class="mt-1">
+        <button class="btn btn-outline-danger btn-sm" (click)="voltar()">Fechar</button>
+      </div>
+    </div>
+    
+    <form [formGroup]='programadorForm' (submit)="submitProgramador()">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" formControlName="nome" id="nome">
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input type="text" class="form-control" id="telefone" formControlName="telefone" >
+      </div>
+      <div class="form-group">
+        <label for="telefone">Projeto</label>
+        <select  id="projetoId" class="form-control" formControlName="projetoId">
+            <option *ngFor="let projeto of projetos" [ngValue]="projeto.id">{{projeto.nome}}</option>
+        </select>
+      </div>
+      <hr>
+      <div class="form-group">
+        <button class="btn btn-success btn-block" [disabled]="!programadorForm.valid">Enviar</button>
+      </div>
+    </form>
+  </div>
+  
+  <div  [ngClass]="{ 'col-sm-6' : programadorSelecionado, 'col-sm-12' : !programadorSelecionado}" >
+    <h2>
+      {{title}}
+    </h2>
+    <button class="btn btn-success" (click)="novoProgramador()">Cadastrar Programador</button>
+    <table class="table table-light table-hover">
+      <thead class="text-light bg-dark">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Projeto</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let programador of programadores">
+          <td>{{programador.nome}}</td>
+          <td>{{programador.telefone}}</td>
+          <td>{{programador.projeto.nome}}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-outline-success btn-sm" (click)= "selectProgramador(programador)">Visualizar</button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deletarProgramador(programador.id)">Deletar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+ 
+<ng-template #template>
+  <div class="modal-body">
+    <app-projetos></app-projetos>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-right" aria-label="Close" (click)="modalRef.hide()">
+      Fechar
+    </button>
+  </div>
+</ng-template>
